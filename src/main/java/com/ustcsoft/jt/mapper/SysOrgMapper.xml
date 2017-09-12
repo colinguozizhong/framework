@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.ustcsoft.jt.mapper.SysOrgMapper">
+	<!-- 检索组织树(业务)-->
+	<select id="searchOrgTreeBusiness"  resultType="com.ustcsoft.system.model.OrganizationVO" parameterType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT distinct
+		    O.ORG_ID orgId,
+		    O.BUSINESS_ID businessId,
+		    O.ORG_NAME orgName,
+		    O.ORG_CODE orgCode,
+		    O.ORG_SIMPLENAME orgSimpleName,
+		    O.REMARK remark,
+			O.MANAGER manager,
+			O.CONTACT_PERSON contactPerson,
+			O.CONTACT_TEL contactTel,
+			O.EMAIL email,
+			O.WANG_ZHI website,
+			O.DI_ZHI address,
+			O.STATUS status,
+			O.ORG_LV orgLv,
+			O.PARENT_BUSINESS_ID parentBusinessId,
+			O.REG_CODE regCode,
+		    O.ORG_ID id,
+		    O.ORG_NAME text,
+		    case when O.PARENT_ID='0' then '0' else '1'  end as leaf,
+		    O.BMBH bmbh,
+		    O.HANG_YE_ID tradeType,
+			O.DU_LI_ZHI_FA duLiZhiFa,
+			O.JIAN_CE_ZHAN_HAO jianCeZhanHao,
+			O.PAI_XU paiXu
+		FROM
+			
+			 M_ORG O 
+			
+			WHERE O.BUSINESS_ID like '${org.businessId}%'
+		
+		ORDER BY O.PAI_XU ASC,O.ORG_LV
+	</select>
+	<!-- 检索配置下级单位(业务)-->
+	<select id="searchOrgTreePeizhi"  resultType="com.ustcsoft.system.model.OrganizationVO" parameterType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT DISTINCT
+		O.ORG_ID orgId,
+		O.BUSINESS_ID businessId,
+		O.AREA_ID areaId,
+		O.ORG_NAME orgName,
+		O.ORG_CODE orgCode,
+		O.ORG_SIMPLENAME orgSimpleName,
+		O.REMARK remark,
+		O.MANAGER manager,
+		O.CONTACT_PERSON contactPerson,
+		O.CONTACT_TEL contactTel,
+		O.EMAIL email,
+		O.WANG_ZHI website,
+		O.DI_ZHI address,
+		O.STATUS STATUS,
+		O.ORG_LV orgLv,
+		O.PARENT_BUSINESS_ID parentBusinessId,
+		O.REG_CODE regCode,
+		O.ORG_ID id,
+		O.ORG_NAME TEXT,
+		CASE WHEN (AREA_ID LIKE '${org.searchId}%' and AREA_ID!=#{org.areaId}) THEN true ELSE false  END AS checked,
+		CASE WHEN AREA_ID is null  THEN false ELSE true  END AS chkDisabled,
+		O.BMBH bmbh,
+		O.HANG_YE_ID tradeType,
+		O.DU_LI_ZHI_FA duLiZhiFa,
+		O.JIAN_CE_ZHAN_HAO jianCeZhanHao,
+		O.PAI_XU paiXu
+		
+    FROM
+
+    M_ORG O 
+
+WHERE O.BUSINESS_ID LIKE '3401%'
+
+ORDER BY O.PAI_XU ASC,O.ORG_LV
+	</select>
+	
+	
+	<!-- 检索配置下级单位(行业)-->
+	<select id="searchOrgTreePeizhiIndustry"  resultType="com.ustcsoft.system.model.OrganizationVO" parameterType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT DISTINCT
+		O.ORG_ID orgId,
+		O.BUSINESS_ID businessId,
+		O.AREA_ID areaId,
+		O.INDUSTRY_ID,
+		O.ORG_NAME orgName,
+		O.ORG_CODE orgCode,
+		O.ORG_SIMPLENAME orgSimpleName,
+		O.REMARK remark,
+		O.MANAGER manager,
+		O.CONTACT_PERSON contactPerson,
+		O.CONTACT_TEL contactTel,
+		O.EMAIL email,
+		O.WANG_ZHI website,
+		O.DI_ZHI address,
+		O.STATUS STATUS,
+		O.ORG_LV orgLv,
+		O.PARENT_BUSINESS_ID parentBusinessId,
+		O.REG_CODE regCode,
+		O.ORG_ID id,
+		O.ORG_NAME TEXT,
+		CASE WHEN O.INDUSTRY_ID LIKE '%${org.industryId}%' THEN 'true' ELSE 'false'  END AS checked,
+		CASE WHEN O.INDUSTRY_ID is null  THEN 'false' ELSE 'true'  END AS chkDisabled,
+		O.BMBH bmbh,
+		O.HANG_YE_ID tradeType,
+		O.DU_LI_ZHI_FA duLiZhiFa,
+		O.JIAN_CE_ZHAN_HAO jianCeZhanHao,
+		O.PAI_XU paiXu
+		
+    FROM
+
+    M_ORG O 
+
+WHERE O.BUSINESS_ID LIKE '3401%'
+
+ORDER BY O.PAI_XU ASC,O.ORG_LV
+	</select>
+	<!-- 检索组织树(地区)-->
+	<select id="searchOrgTreeArea"  resultType="com.ustcsoft.system.model.OrganizationVO" parameterType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT distinct
+		    O.ORG_ID orgId,
+		    O.AREA_ID areaId,
+		    O.ORG_NAME orgName,
+		    O.ORG_CODE orgCode,
+		    O.ORG_SIMPLENAME orgSimpleName,
+		    O.REMARK remark,
+			O.MANAGER manager,
+			O.CONTACT_PERSON contactPerson,
+			O.CONTACT_TEL contactTel,
+			O.EMAIL email,
+			O.WANG_ZHI website,
+			O.DI_ZHI address,
+			O.STATUS status,
+			O.ORG_LV orgLv,
+			O.PARENT_BUSINESS_ID parentBusinessId,
+			O.REG_CODE regCode,
+		    O.ORG_ID id,
+		    O.ORG_NAME text,
+		    case when O.PARENT_ID='0' then '0' else '1'  end as leaf,
+		    O.BMBH bmbh,
+		    O.HANG_YE_ID tradeType,
+			O.DU_LI_ZHI_FA duLiZhiFa,
+			O.JIAN_CE_ZHAN_HAO jianCeZhanHao,
+			O.PAI_XU paiXu
+		FROM
+			
+			 M_ORG O 
+			
+			WHERE O.AREA_ID like '${org.areaId}%'
+		
+		ORDER BY O.PAI_XU ASC,O.ORG_LV
+	</select>
+	
+	<!-- 检索组织树(行业)-->
+	<select id="searchOrgTreeIndustry"  resultType="com.ustcsoft.system.model.OrganizationVO" parameterType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT distinct
+		    O.ORG_ID orgId,
+		    O.AREA_ID areaId,
+		    O.INDUSTRY_ID,
+		    O.ORG_NAME orgName,
+		    O.ORG_CODE orgCode,
+		    O.ORG_SIMPLENAME orgSimpleName,
+		    O.REMARK remark,
+			O.MANAGER manager,
+			O.CONTACT_PERSON contactPerson,
+			O.CONTACT_TEL contactTel,
+			O.EMAIL email,
+			O.WANG_ZHI website,
+			O.DI_ZHI address,
+			O.STATUS status,
+			O.ORG_LV orgLv,
+			O.PARENT_BUSINESS_ID parentBusinessId,
+			O.REG_CODE regCode,
+		    O.ORG_ID id,
+		    O.ORG_NAME text,
+		    case when O.PARENT_ID='0' then '0' else '1'  end as leaf,
+		    O.BMBH bmbh,
+		    O.HANG_YE_ID tradeType,
+			O.DU_LI_ZHI_FA duLiZhiFa,
+			O.JIAN_CE_ZHAN_HAO jianCeZhanHao,
+			O.PAI_XU paiXu
+		FROM
+			
+			 M_ORG O 
+			
+			WHERE O.INDUSTRY_ID like '${org.industryId}%'
+		
+		ORDER BY O.PAI_XU ASC,O.ORG_LV
+	</select>
+	<!-- 检索组织树(上级管理)-->
+	<select id="searchOrgTreeManager"  resultType="com.ustcsoft.system.model.OrganizationVO" parameterType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT distinct
+		    O.ORG_ID orgId,
+		    O.MANAGER_ID managerId,
+		    O.INDUSTRY_ID,
+		    O.ORG_NAME orgName,
+		    O.ORG_CODE orgCode,
+		    O.ORG_SIMPLENAME orgSimpleName,
+		    O.REMARK remark,
+			O.MANAGER manager,
+			O.CONTACT_PERSON contactPerson,
+			O.CONTACT_TEL contactTel,
+			O.EMAIL email,
+			O.WANG_ZHI website,
+			O.DI_ZHI address,
+			O.STATUS status,
+			O.ORG_LV orgLv,
+			O.PARENT_BUSINESS_ID parentBusinessId,
+			O.REG_CODE regCode,
+		    O.ORG_ID id,
+		    O.ORG_NAME text,
+		    case when O.PARENT_ID='0' then '0' else '1'  end as leaf,
+		    O.BMBH bmbh,
+		    O.HANG_YE_ID tradeType,
+			O.DU_LI_ZHI_FA duLiZhiFa,
+			O.JIAN_CE_ZHAN_HAO jianCeZhanHao,
+			O.PAI_XU paiXu
+		FROM
+			
+			 M_ORG O 
+			
+			WHERE O.MANAGER_ID like '${org.managerId}%'
+		
+		ORDER BY O.PAI_XU ASC,O.ORG_LV
+	</select>
+	<!--检索组织列表  按业务 -->
+	<select id="searchOrgListPage" parameterType="com.ustcsoft.system.model.OrganizationVO" resultType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT distinct
+		    O.ORG_ID orgId,
+			O.BUSINESS_ID businessId,
+		    O.ORG_NAME orgName,
+		    O.ORG_CODE orgCode,
+		    O.ORG_SIMPLENAME orgSimpleName,
+		    O.REMARK remark,
+			O.MANAGER manager,
+			O.CONTACT_PERSON contactPerson,
+			O.CONTACT_TEL contactTel,
+			O.EMAIL email,
+			O.WANG_ZHI website,
+			O.DI_ZHI address,
+			O.STATUS status,
+			O.ORG_LV orgLv,
+			O.PARENT_BUSINESS_ID parentBusinessId,
+			O.REG_CODE regCode,
+		    O.ORG_ID id,
+		    O.ORG_NAME text,
+		    O.BMBH bmbh,
+		    O.HANG_YE_ID tradeType,
+			O.DU_LI_ZHI_FA duLiZhiFa,
+			O.JIAN_CE_ZHAN_HAO jianCeZhanHao,
+			O.PAI_XU paiXu
+            FROM 
+		   M_ORG O 	
+			WHERE   1=1
+			<if test="org.orgName != null and org.orgName != ''">
+			and	O.ORG_NAME like '%${org.orgName}%'
+		    </if>
+			<if test="org.businessId != null and org.businessId != ''">
+			and	O.BUSINESS_ID like '${org.businessId}%'
+		    </if>
+			<if test="org.businessId == null or org.businessId == ''">
+		      and   O.BUSINESS_ID like '340%'
+		    </if>
+		 	
+		ORDER BY O.PAI_XU ASC,O.ORG_LV
+	</select>
+	
+	<!--检索组织列表  (不带page)-->
+	<select id="searchOrg" parameterType="com.ustcsoft.system.model.OrganizationVO" resultType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT distinct
+		    O.ORG_ID orgId,
+			O.BUSINESS_ID businessId,
+			O.MANAGER_ID managerId,
+		    O.ORG_NAME orgName,
+		    O.ORG_CODE orgCode,
+		    O.ORG_SIMPLENAME orgSimpleName,
+		    O.REMARK remark,
+			O.MANAGER manager,
+			O.CONTACT_PERSON contactPerson,
+			O.CONTACT_TEL contactTel,
+			O.EMAIL email,
+			O.WANG_ZHI website,
+			O.DI_ZHI address,
+			O.STATUS status,
+			O.ORG_LV orgLv,
+			O.PARENT_BUSINESS_ID parentBusinessId,
+			O.REG_CODE regCode,
+			X.XING_ZHENG_QU_HUA_MING_CHENG regName,
+		    O.ORG_ID id,
+		    O.ORG_NAME text,
+		    O.BMBH bmbh,
+		    O.HANG_YE_ID tradeType,
+			O.DU_LI_ZHI_FA duLiZhiFa,
+			O.JIAN_CE_ZHAN_HAO jianCeZhanHao,
+			O.PAI_XU paiXu
+            FROM 
+		   M_ORG O 	
+			left join m_xzqhdm X on O.REG_CODE = X.XING_ZHENG_QU_HUA_ID
+			WHERE   1=1
+			<if test="org.businessId != null and org.businessId != ''">
+			and	O.BUSINESS_ID = #{org.businessId}
+		    </if>
+		 	
+		ORDER BY O.PAI_XU ASC,O.ORG_LV
+	</select>
+	<!--根据businessId查找对应的名称 -->
+	<select id="seachOrgBusinessByBusinessId" parameterType="java.lang.String" resultType="java.lang.String">
+		select org_name from  M_ORG where business_id=#{searchId}
+	</select>
+	<!--检索组织列表  地区 -->
+	<select id="searchOrgListAreaPage" parameterType="com.ustcsoft.system.model.OrganizationVO" resultType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT distinct
+		    O.ORG_ID orgId,
+			O.AREA_ID areaId,
+		    O.ORG_NAME orgName,
+		    O.ORG_CODE orgCode,
+		    O.ORG_SIMPLENAME orgSimpleName,
+		    O.REMARK remark,
+			O.MANAGER manager,
+			O.CONTACT_PERSON contactPerson,
+			O.CONTACT_TEL contactTel,
+			O.EMAIL email,
+			O.WANG_ZHI website,
+			O.DI_ZHI address,
+			O.STATUS status,
+			O.ORG_LV orgLv,
+			O.PARENT_BUSINESS_ID parentBusinessId,
+			O.REG_CODE regCode,
+			X.XING_ZHENG_QU_HUA_MING_CHENG regName,
+		    O.ORG_ID id,
+		    O.ORG_NAME text,
+		    O.BMBH bmbh,
+		    O.HANG_YE_ID tradeType,
+			O.DU_LI_ZHI_FA duLiZhiFa,
+			O.JIAN_CE_ZHAN_HAO jianCeZhanHao,
+			O.PAI_XU paiXu
+            FROM 
+		   M_ORG O 	
+			left join m_xzqhdm X on O.REG_CODE = X.XING_ZHENG_QU_HUA_ID
+			WHERE   1=1
+			<if test="org.orgName != null and org.orgName != ''">
+			and	O.ORG_NAME like '%${org.orgName}%'
+		    </if>
+			<if test="org.areaId != null and org.areaId != ''">
+			and	 O.AREA_ID like '${org.areaId}%'
+		    </if>
+			<if test="org.areaId == null or org.areaId == ''">
+		      and   O.AREA_ID like '340%'
+		    </if>
+		 	
+	     	ORDER BY O.PAI_XU ASC,O.ORG_LV
+	</select>
+	
+	
+	<!--检索组织列表  行业 -->
+	<select id="searchOrgListIndustryPage" parameterType="com.ustcsoft.system.model.OrganizationVO" resultType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT distinct
+		    O.ORG_ID orgId,
+			O.INDUSTRY_ID industryId,
+		    O.ORG_NAME orgName,
+		    O.ORG_CODE orgCode,
+		    O.ORG_SIMPLENAME orgSimpleName,
+		    O.REMARK remark,
+			O.MANAGER manager,
+			O.CONTACT_PERSON contactPerson,
+			O.CONTACT_TEL contactTel,
+			O.EMAIL email,
+			O.WANG_ZHI website,
+			O.DI_ZHI address,
+			O.STATUS status,
+			O.ORG_LV orgLv,
+			O.PARENT_BUSINESS_ID parentBusinessId,
+			O.REG_CODE regCode,
+			X.XING_ZHENG_QU_HUA_MING_CHENG regName,
+		    O.ORG_ID id,
+		    O.ORG_NAME text,
+		    O.BMBH bmbh,
+		    O.HANG_YE_ID tradeType,
+			O.DU_LI_ZHI_FA duLiZhiFa,
+			O.JIAN_CE_ZHAN_HAO jianCeZhanHao,
+			O.PAI_XU paiXu
+            FROM 
+		   M_ORG O 	
+			left join m_xzqhdm X on O.REG_CODE = X.XING_ZHENG_QU_HUA_ID
+			WHERE   1=1
+			<if test="org.orgName != null and org.orgName != ''">
+			and	O.ORG_NAME like '%${org.orgName}%'
+		    </if>
+			<if test="org.industryId != null and org.industryId != ''">
+			and	 O.INDUSTRY_ID like '${org.industryId}%'
+		    </if>
+			<if test="org.areaId == null or org.areaId == ''">
+		      and   O.INDUSTRY_ID like '340%'
+		    </if>
+		 	
+	     	ORDER BY O.PAI_XU ASC,O.ORG_LV
+	</select>
+	
+	<!--检索行政区划的树 -->
+	<select id="searchOrgXZTree"  resultType="com.ustcsoft.system.model.XZQHVO">
+		 SELECT DISTINCT T.XING_ZHENG_QU_HUA_ID AS XZQHId,
+                T.XING_ZHENG_QU_HUA_MING_CHENG AS XZQHName,
+                T.FU_XING_ZHENG_QU_HUA_ID AS FXZQHId
+                 FROM m_xzqhdm T
+	</select>
+	 
+	<!--根据orgBusiness获取对应的businessId-->
+	<select id="findBusinessId"  parameterType="java.lang.String" resultType="java.lang.String" >
+	select  O.BUSINESS_ID businessId
+	       FROM 
+		   M_ORG O 	
+		   where 
+		   O.ORG_NAME=#{orgBusiness}
+	</select>
+	
+	<!--根据orgId获取对应的businessId-->
+	<select id="searBusinessId"  parameterType="java.lang.String" resultType="java.lang.String" >
+	select  O.BUSINESS_ID businessId
+	       FROM 
+		   M_ORG O 	
+		   where 
+		   O.ORG_ID=#{orgId}
+	</select>
+	<!--根据orgId获取对应的areaId-->
+	<select id="searAreaId"  parameterType="java.lang.String" resultType="java.lang.String" >
+	select  O.AREA_ID areaId
+	       FROM 
+		   M_ORG O 	
+		   where 
+		   O.ORG_ID=#{orgId}
+	</select>
+	<!--根据orgId获取对应的industryId-->
+	<select id="searIndustryId"  parameterType="java.lang.String" resultType="java.lang.String" >
+	select  O.INDUSTRY_ID industryId
+	       FROM 
+		   M_ORG O 	
+		   where 
+		   O.ORG_ID=#{orgId}
+	</select>
+	
+	
+	<!--根据BusinessId获取此父节点上最大的Id-->
+	<select id="findMaxId"  parameterType="java.lang.String" resultType="java.lang.String" >
+	select  max(O.BUSINESS_ID) 
+	       FROM 
+		   M_ORG O 	
+		   where 
+		   O.BUSINESS_ID like '${BusinessId}%'
+	</select>
+	
+	<!--获取最大的组织Id-->
+	<select id="findMaxOrgId" resultType="java.lang.String" >
+	select  max(O.ORG_ID) 
+	       FROM 
+		   M_ORG O 	
+		   where O.ORG_ID like '10%'
+	</select>
+	
+	
+	<!--根据XING_ZHENG_QU_HUA_MING_CHENG 获取行政区划 ID-->
+	<select id="findReCode"  parameterType="java.lang.String" resultType="java.lang.String" >
+			SELECT 
+			XING_ZHENG_QU_HUA_ID
+			FROM
+			m_xzqhdm
+			WHERE XING_ZHENG_QU_HUA_MING_CHENG=#{regName}
+	</select>
+	
+	<!--添加组织-->
+	<insert id="addOrgInfo" parameterType="com.ustcsoft.system.model.OrganizationVO">
+		insert into M_ORG (
+			ORG_ID,
+			PARENT_ID,
+			BUSINESS_ID,
+			MANAGER_ID,
+			ORG_NAME,
+			ORG_CODE,
+		    ORG_SIMPLENAME,
+			REMARK,
+			MANAGER,
+			CONTACT_PERSON,
+			CONTACT_TEL,
+			EMAIL,
+			WANG_ZHI,
+			DI_ZHI,
+			JI_GOU_ZHI_NENG,
+			STATUS,
+			ORG_LV,
+			PEOPLE_GOVERNMENT,
+			PARENT_BUSINESS_ID,
+			REG_CODE,
+			BMBH,
+			YOU_BIAN,
+			HANG_YE_ID,
+			DU_LI_ZHI_FA,
+			JIAN_CE_ZHAN_HAO,
+			SHI_SHI_ZHU_TI_BIAN_HAO
+		)values(
+			#{org.orgId},
+			#{org.parentId},
+			#{org.businessId},
+			#{org.managerId},
+			#{org.orgName},
+			#{org.orgCode},
+			#{org.orgSimpleName},
+			#{org.remark},
+			#{org.manager},
+			#{org.contactPerson},
+			#{org.contactTel},
+			#{org.email},
+			#{org.website},
+			#{org.address},
+			#{org.func},
+			#{org.status},
+			#{org.orgLv},
+			#{org.government},
+			#{org.parentBusinessId},
+			#{org.regCode},
+			#{org.bmbh},
+			#{org.youBian},
+			#{org.tradeType},
+			#{org.duLiZhiFa},
+			#{org.jianCeZhanHao},
+			#{org.bh}
+		)
+	</insert>
+	
+	<!--更新组织-->
+	<update id="updateOrg" parameterType="com.ustcsoft.system.model.OrganizationVO">
+		update M_ORG set
+			ORG_NAME = #{org.orgName},
+			ORG_CODE = #{org.orgCode},
+			ORG_SIMPLENAME = #{org.orgSimpleName},
+			REMARK = #{org.remark},
+			MANAGER = #{org.manager},
+			CONTACT_PERSON = #{org.contactPerson},
+			CONTACT_TEL = #{org.contactTel},
+			EMAIL = #{org.email},
+			WANG_ZHI = #{org.website},
+			DI_ZHI = #{org.address},
+			JI_GOU_ZHI_NENG = #{org.func},
+			STATUS = #{org.status},
+			ORG_LV = #{org.orgLv},
+			PEOPLE_GOVERNMENT =#{org.government},
+			PARENT_BUSINESS_ID = #{org.parentBusinessId},
+			REG_CODE=#{org.regCode},
+			YOU_BIAN = #{org.youBian},
+			HANG_YE_ID = #{org.tradeType},
+			DU_LI_ZHI_FA = #{org.duLiZhiFa},
+			JIAN_CE_ZHAN_HAO = #{org.jianCeZhanHao},
+			MANAGER_ID=#{org.managerId}
+		where
+			ORG_ID = #{org.orgId}
+	</update>
+	
+	<!--根据行政执法系统中businessId删除组织关系信息-->
+	<delete id="deleteOrg" parameterType="java.lang.String">
+		delete from M_ORG  where
+			BUSINESS_ID like '${businessId}%'
+	</delete>
+	
+	
+	<!-- 组织机构 银行账户管理-->
+	<select id="searchOrgBankList" parameterType="java.lang.String" resultType="com.ustcsoft.system.model.OrganizationVO">
+		SELECT
+		   C.YING_HANG_MING_CHENG as bankName,
+		   C.YING_HANG_ZHANG_HAO as accountNumber
+		FROM
+		   JCSJ_D_YHZH C
+		WHERE C.ORG_BUSINESSID = #{org.businessId}
+	</select>
+	
+	<!--添加银行-->
+	<insert id="addBank" parameterType="com.ustcsoft.system.model.OrganizationVO">
+		insert into JCSJ_D_YHZH (
+			YING_HANG_MING_CHENG,
+			YING_HANG_ZHANG_HAO,
+			ORG_BUSINESSID
+		)values(
+			#{org.bankName},
+			#{org.accountNumber},
+			#{org.businessId}
+		)
+	</insert>
+	
+	<!--删除银行-->
+	<delete id="delBank" parameterType="com.ustcsoft.system.model.OrganizationVO">
+		delete from JCSJ_D_YHZH  where
+			ORG_BUSINESSID= #{org.businessId} and  YING_HANG_ZHANG_HAO=#{org.accountNumber} and YING_HANG_MING_CHENG=#{org.bankName}
+	</delete>
+	
+	
+	<!--配置下级单位-->
+	<update id="setPeizhi" parameterType="com.ustcsoft.system.model.OrganizationVO">
+	   UPDATE M_ORG SET 
+	   AREA_Id=#{org.areaId} WHERE ORG_ID=#{org.orgId}
+	</update>
+	
+	<!--配置下级单位(行业)-->
+	<update id="setPeizhiIndustry" parameterType="com.ustcsoft.system.model.OrganizationVO">
+	   UPDATE M_ORG SET 
+	   INDUSTRY_Id=#{org.industryId} WHERE ORG_ID=#{org.orgId}
+	</update>
+	
+	<!--查找自己的orgId-->
+	<select id="findSelfOrgId" parameterType="java.lang.String" resultType="java.lang.String">
+		select ORG_ID from  
+		 M_ORG 
+		 where AREA_Id =#{areaId}
+		
+	</select>
+	<!--删除配置(地区)-->
+	<update id="delPeizhi" parameterType="java.lang.String">
+	 UPDATE M_ORG SET 
+	   AREA_Id=NULL WHERE AREA_Id like  '${areaId}%'
+	</update>
+	<!--删除配置(行业)-->
+	<update id="delPeizhiIndustry" parameterType="java.lang.String">
+	 UPDATE M_ORG SET 
+	   INDUSTRY_ID=NULL WHERE INDUSTRY_ID like  '${industryId}%'
+	</update>
+	
+	
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.ustcsoft.jt.mapper.SysUserMenuMapper">
+	<resultMap id="MenuMap" type="java.util.HashMap">
+		  <result property="userId" column="USER_ID" />
+		  <result property="menuId" column="MENU_ID" />
+		  <result property="menuName" column="MENU_NAME" />
+		  <result property="menuUrl" column="MENU_URL" />
+		  <result property="menuIco" column="MENU_ICO" />
+		  <result property="isPop" column="IS_POP" />
+	</resultMap>
+	
+	
+	
+	<!-- 功能说明:根据用户ID获取常用菜单-->
+  	<select id="selectUserMenuById" resultMap="MenuMap">		
+		select 
+			 a.USER_ID,
+			 a.MENU_ID,
+			 b.MENU_NAME,
+			 b.MENU_URL,
+			 b.MENU_ICO,
+			 b.IS_POP
+		from 
+			 M_USER_MENU a
+		join
+			 M_MENU b
+		on
+		    a.MENU_ID = b.MENU_ID
+	    where
+	        a.USER_ID = #{userId}
+	    and b.DEL_FLG = '0'
+	    and a.menu_id in (
+	    		SELECT
+						DISTINCT(a.MENU_ID)
+					  FROM (select * from M_USER_ROLE where user_id   = #{userId}) c 
+			   	left join M_ROLE_MENU b
+			    	on  c.role_id is not null and c.role_id = b.ROLE_ID
+			 	 left join M_MENU a
+			    	on  a.DEL_FLG = '0'  and a.MENU_ID = b.MENU_ID 
+			 	start with a.parent_id = 0
+				connect by prior a.MENU_ID = a.parent_id
+	)  
+	    order by a.SORT
+    </select>
+	<!--  功能说明:查询菜单详情  -->
+	<select id="querySysMenu" resultType="com.ustcsoft.system.model.SysMenuVO"  parameterType="java.lang.String">
+				
+		select 
+           MENU_ID
+		  , PARENT_ID
+		  , IS_POP
+		  , IS_LEAF
+		  , HELP_URL
+		  , MENU_URL
+		  , BUSI_CODE
+		  , MENU_NAME
+		  , MENU_ICO
+		  , MENU_SORT
+		  , DEL_FLG
+   	  from M_MENU where
+			MENU_ID = #{node}
+	</select>
+</mapper>

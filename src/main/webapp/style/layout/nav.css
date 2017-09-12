@@ -1,0 +1,50 @@
+/* 公用 */
+#n{margin:10px auto; width:920px; border:1px solid #CCC;font-size:14px; line-height:30px;}#n a{ padding:0 4px; color:#333}
+.clear{clear:both;height:0px;width:0px;font-size: 0px;line-height: 0px;}
+.cent{ margin:0 auto; width:100%; overflow:hidden}
+/* 公用 end */
+
+.hide {display:none;}
+.menuNav{ position:relative; width:230px; height:1000px; background:#3c96d2;}
+.menuNav h2{ height:60px; line-height:60px; text-align:center; font-size:18px; background:#227ab5; color:#fff;}
+.navlist{position:absolute; left:0; top:60px;}
+.navlist dl{position:relative;width:230px;height:45px;line-height:45px}
+.navlist dl dt{float:left; width:100%; height:45px; line-height:45px; border-bottom:1px solid #439eda; background:url(./images/jt.png) no-repeat 210px center;}
+.navlist dl dt a{ width:100%; display:block; color:#fcfcfd; font-size:14px; font-family:"Microsoft YaHei",SimHei,arial; padding-left:5px;}
+.navlist dl dt a.on{color:#3c96d2; height:45px; padding-top:0; line-height:45px; background:#ecf5fb;}
+.navlist dl dt a i, .navlist dl dt a:hover i{ float:left; display:inline-block; width:30px; height:30px; background:url(./images/icon.png) no-repeat; margin-right:10px; margin:12px 0 auto 10px;}
+.navlist dl dt a i.xzxk{ background-position:0 2px;}
+.navlist dl dt a i.xzcf{ background-position:0 -34px;}
+.navlist dl dt a i.xzzf{ background-position:0 -70px;}
+.navlist dl dt a i.xzqz{ background-position:0 -106px;}
+.navlist dl dt a i.xzfy{ background-position:0 -141px;}
+.navlist dl dt a i.zfry{ background-position:0 -176px;}
+.navlist dl dt a i.kspx{ background-position:0 -212px;}
+.navlist dl dt a i.xzjd{ background-position:0 -249px;}
+.navlist dl dt a i.dwfw{ background-position:0 -286px;}
+.navlist dl dt a i.xzjc{ background-position:0 -318px;}
+.navlist dl dt a i.xzcj{ background-position:0 -353px;}
+.navlist dl dt a i.xzqr{ background-position:0 -389px;}
+.navlist dl dt a i.xzzs{ background-position:0 -424px;}
+.navlist dl dt a i.zhtj{ background-position:0 -460px;}
+.navlist dl dt:hover a i.xzxk{ background-position:-50px 2px;}
+.navlist dl dt:hover a i.xzcf{ background-position:-50px -34px;}
+.navlist dl dt:hover a i.xzzf{ background-position:-50px -70px;}
+.navlist dl dt:hover a i.xzqz{ background-position:-50px -106px;}
+.navlist dl dt:hover a i.xzfy{ background-position:-50px -141px;}
+.navlist dl dt:hover a i.zfry{ background-position:-50px -176px;}
+.navlist dl dt:hover a i.kspx{ background-position:-50px -212px;}
+.navlist dl dt:hover a i.xzjd{ background-position:-50px -249px;}
+.navlist dl dt:hover a i.dwfw{ background-position:-50px -286px;}
+.navlist dl dt:hover a i.xzjc{ background-position:-50px -318px;}
+.navlist dl dt:hover a i.xzcj{ background-position:-50px -353px;}
+.navlist dl dt:hover a i.xzqr{ background-position:-50px -389px;}
+.navlist dl dt:hover a i.xzzs{ background-position:-50px -424px;}
+.navlist dl dt:hover a i.zhtj{ background-position:-50px -460px;}
+.navlist dl dt.icon03 a.on,.navlist dl dt.icon04 a.on,.navlist dl dt.icon05 a.on,.navlist dl dt.icon06 a.on,.navlist dl dt.icon07 a.on,.navlist dl dt.icon08 a.on,.navlist dl dt.icon09 a.on,.navlist dl dt.icon10 a.on,.navlist dl dt.icon11 a.on,.navlist dl dt.icon12 a.on,.navlist dl dt.icon13 a.on,.navlist dl dt.icon14 a.on,.navlist dl dt.icon15 a.on,.navlist dl dt.icon16 a.on,.navlist dl dt.icon17 a.on,.navlist dl dt.icon18 a.on,.navlist dl dt.icon19 a.on,.navlist dl dt.icon20 a.on{ display:inline-block;}
+.navlist dl dd{display:none;position:absolute; left:230px; text-align:left; width:250px;border:2px solid #3c96d2;background:#ecf5fb;z-index:1}
+.navlist dl dd .sideleft{float:left;width:210px; padding:20px; color:#CCC}
+.navlist dl dd .sideleft a{ padding:0 5px}
+
+
+.menv03 {top:-1px;}.menv04 {top:-10px;}.menv05 {top:-10px;}.menv06 {top:-10px;}.menv07 {top:-10px;}.menv08 {top:-10px;}.menv09 {top:-10px;}.menv10 {top:-10px;}.menv11 {top:-10px;}.menv12 {top:-10px;}.menv13 {top:-10px;}.menv14 {top:-10px;}.menv15 {top:-10px;}.menv16 {top:-10px;}.menv17 {top:-10px;}.menv18 {top:-10px;}.menv19 {bottom:-10px;}.menv20{bottom:0;}

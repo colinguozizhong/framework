@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.ustcsoft.jt.mapper.MAnnouncementMapper">
+	<select id="checkUser" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(U.USER_ID) from M_USER U
+		left join M_USER_ROLE R ON R.USER_ID = U.USER_ID
+		left join M_ORG O ON O.ORG_ID = U.ORG_ID
+		where R.ROLE_ID in ('1000000001000845','1000000001000846','1000000000000566','1000000001000771')
+		and O.HANG_YE_ID = '02'
+		and U.USER_ID = #{userId}
+	</select>	
+	
+	<select id="checkUserGongLu" resultType="java.lang.Integer">
+		select count(U.USER_ID) from M_USER U
+		left join M_USER_ROLE R ON R.USER_ID = U.USER_ID
+		left join M_ROLE MR ON MR.ROLE_ID = R.ROLE_ID
+		where (R.ROLE_ID in ('1000000001000966') or MR.ROLE_NAME like '省级公路许可终审人员')
+		and U.USER_ID = #{userId}
+		and U.ORG_ID = '1000000000001108'
+	</select>
+</mapper>

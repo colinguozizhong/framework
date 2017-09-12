@@ -1,0 +1,45 @@
+body{font-family:宋体,Microsoft Yahei,Arial Narrow; background:#fff; font-size:12px; color:#333; padding:0px; margin:0px;  line-height:26px;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,span,form,input,textarea{padding:0; margin:0;}
+table{border-spacing:0 ; border-collapse: collapse ;}
+img{border:0;}
+ol,ul ,li{list-style:none;} 
+A:link,A:visited{color:#333;text-decoration:none; text-decoration:underline;}
+A:active,A:hover{color:#f00;text-decoration:underline;}
+.f_l{float:left; white-space:nowrap;}
+.f_r{float:right;}
+.cl{clear:both;}
+
+
+.top{ padding:10px;} 
+.b_1{ /* width:880px; */ }
+.b_2{ padding:00px 0px 0px 80px;/* width:280px; */ font-size:14px; font-family:微软雅黑; }
+.bg_01{ background:url(../images/bg_1.png) no-repeat 80px 0px; height:22px; line-height:22px; padding-left:90px; margin:20px 0px;}
+.c_1{ padding-right:20px;}
+.pd20{ padding-bottom:20px;} 
+.m_main{display:block; overflow:hidden; clear:both; padding-bottom:20px;}
+.buttom{ display:block; overflow:hidden;text-align:center; font-size:14px; border-top:1px solid #CCC; height:63px; line-height:63px;}
+.pd80{ padding-left:80px; font-size:14px; }
+.pd80 div{ background:url(../images/icon.png) no-repeat  left; padding-left:10px; line-height:40px;}
+.pd15{ padding-top:35px;}
+
+.banner{position: relative;}
+.box_h{
+	position: absolute;
+	left: 980px;
+	top: 50px;
+	background:#f7fbfe; width:295px;
+	 -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:5px;
+
+
+
+	
+	
+	}
+.pd60{ padding-top:40px;}
+.box_h div{ padding-bottom:25px;}
+.bu{ background:url(../images/bu.png) no-repeat; width:246px; height:39px; border:0px;}
+.tex01{ background:url(../images/user.png) no-repeat; width:246px; height:43px; border:0px; padding-left:30px; line-height:43px;}
+.tex02{ background:url(../images/pass.png) no-repeat; width:246px; height:43px; border:0px; padding-left:30px;line-height:43px;}
+.pd30{padding-left:30px;}

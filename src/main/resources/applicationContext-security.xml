@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<http pattern="/images/**" security="none" />
+	<http pattern="/scripts/**" security="none" />
+	<http pattern="/style/**" security="none" />
+	<http pattern="/login.jsp" security="none" />
+	
+	<!-- auto-config="true"默认提供三个相关认证功能：HTTP基本认证、FORM登录认证、退出 -->
+	<!-- use-expressions="true" :使用的投票器为WebExpressionVoter；-->
+	<http use-expressions="true" entry-point-ref="tempAuthenticationEntryPoint">
+		<!-- 提供方法和“伪属性”解析 ： access="authenticated"(认证通过就可以访问)-->
+		<intercept-url pattern="/**" access="isAuthenticated()"/>
+	     <session-management invalid-session-url="/login.jsp">
+			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+		</session-management>
+		<custom-filter ref="tempAuthenticaionFilter" position="FORM_LOGIN_FILTER"/>
+		<!-- logoutFilter: 1、Session失效；2、清除SecurityContex;3、重定向页面至 logout-success-url-->
+		<logout invalidate-session="true" logout-success-url="/login.jsp" logout-url="/j_spring_security_logout" />
+		
+	</http>
+	
+	<beans:bean id="tempAuthenticaionFilter" class="com.ustcsoft.jt.security.AuthenticaionFilter">
+		<beans:property name="userDetailsService" ref="tempUserDetailService" />
+		<beans:property name="authenticationManager" ref="tempAuthenticationManager" />
+		<beans:property name="filterProcessesUrl" value="/j_spring_security_check" />
+		<beans:property name="authenticationSuccessHandler">
+			<beans:bean
+				class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+				<beans:property name="defaultTargetUrl" value="/frameJsp.do" />
+			</beans:bean>
+		</beans:property>
+		<beans:property name="authenticationFailureHandler">
+			<beans:bean
+				class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+				<beans:property name="defaultFailureUrl" value="/login.jsp?error=true" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<!-- 未登录的切入点 -->
+<!-- 	<beans:bean id="tempAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"> -->
+	<beans:bean id="tempAuthenticationEntryPoint" class="com.ustcsoft.jt.security.AjaxLoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/login.jsp"/>
+	</beans:bean>	
+	
+	<!-- 认证管理提供 -->
+	<authentication-manager alias="tempAuthenticationManager">
+		<!-- authentication-provider：默认实例化一个内置的实现DaoAuthenticationProvider -->
+		<authentication-provider user-service-ref="tempUserDetailService">
+			<password-encoder ref="md5PasswordEncoder"/>
+		</authentication-provider>
+	</authentication-manager>
+	<beans:bean id="tempUserDetailService" class="com.ustcsoft.jt.security.TempUserDetailService"></beans:bean>
+	<beans:bean id="md5PasswordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+	<!-- 国际化 -->
+	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:org/springframework/security/messages_zh_CN" />
+	</beans:bean>	
+	
+</beans:beans>
